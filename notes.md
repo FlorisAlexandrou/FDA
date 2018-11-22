@@ -8,3 +8,5 @@ Team members are:
 Dimitris drew the initial index page on paper.  
 ####5/11/18
 Floris created a sample of the drawn initial index page.
+####16/11/18
+A brief meeting to decide and assign parts of the project to implement.
