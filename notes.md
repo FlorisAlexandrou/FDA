@@ -10,3 +10,5 @@ Dimitris drew the initial index page on paper.
 Floris created a sample of the drawn initial index page.
 ####16/11/18
 A brief meeting to decide and assign parts of the project to implement.
+####22/11/18
+Floris Created an initial leaderboard page.

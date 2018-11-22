@@ -23,3 +23,9 @@ img {
     height:50px;
 
 }
+
+#name{
+    display: block;
+    padding: 10px;
+
+}
