@@ -1,31 +1,27 @@
-body{
-    text-align: center;
-    border: 10px navajowhite;
-    background-size: auto;
+html {
+    background: url(background.jpg) no-repeat center center fixed; /*Set the image as background*/
+    background-size: cover;
+    position: relative;
+    text-align: center; /*Of the whole website*/
 }
 
-header{
-    border: 1px solid black;
-    margin: 1px;
+img { /* All the images including the logo images, images on home page and images that i have use as titles */
+    padding: 1px;
+    border: 2px;
+    width: 100%;
+    height: auto;
+    margin: auto;
 }
-
-main{
-    border: 1px solid black;
-    margin: 1px;
+.Instructions {
+    background-color: antiquewhite;
+    border: solid 2px;
+    border-color: black;
 }
-
-footer{
-    border: 1px solid black;
-    margin: 1px;
+.Identity{
+    font-size: 40px;
+    color: white;
 }
-img {
-    width:50px;
-    height:50px;
-
-}
-
-#name{
-    display: block;
-    padding: 10px;
-
+h1{
+    text-decoration: underline;
+    color: white;
 }
