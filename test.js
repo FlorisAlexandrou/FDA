@@ -166,3 +166,13 @@ function answer(ans) {
     xhttp.open("GET", "https://codecyprus.org/th/api/answer?session=" + document.cookie + "&answer=" + ans, true);
     xhttp.send();
 }
+
+//If cookie exists then direct to questions (still in development)
+function checkSession() {
+    if (document.cookie !== "")
+        window.location.href = "questions.html";
+
+
+
+
+}
