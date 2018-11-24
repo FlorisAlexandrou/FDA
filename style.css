@@ -1,5 +1,5 @@
 html {
-    background: url(background.jpg) no-repeat center center fixed; /*Set the image as background*/
+    background: url(pictures/background.jpg) no-repeat center center fixed; /*Set the image as background*/
     background-size: cover;
     position: relative;
     text-align: center; /*Of the whole website*/
@@ -21,6 +21,14 @@ img { /* All the images including the logo images, images on home page and image
     font-size: 40px;
     color: white;
 }
+
+/*Leaderboard text*/
+#lead p {
+    text-decoration: underline;
+    color: black;
+    font-size: 150%;
+}
+
 h1{
     text-decoration: underline;
     color: white;
