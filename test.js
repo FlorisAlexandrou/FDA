@@ -67,7 +67,7 @@ function start(uName, appName) {
             }
             else {
                 document.cookie = object.session;
-                location.href("questions.html")
+                window.location.href = "questions.html";
             }
         }
         else {
@@ -103,10 +103,16 @@ function question() {
             else if(object.questionType === "TEXT"){
                 let qDiv = document.getElementById("questionType");
                 qDiv.innerHTML = "<form class='ansForm'>" +
-                "Your Answer: <input type='text' name='ans' value='Text goes here...'>"+
+                "Your Answer: <input class='ansElement' type='text' name='ans' title='Text goes here...'>"+
                 "<input class='ansButton' type='button' name='answer' value='submit' onclick ='textAnswer()'>"
             }
 
+            else if(object.questionType === "INTEGER"){
+                let qDiv = document.getElementById("questionType");
+                qDiv.innerHTML = "<form class='ansForm'>" +
+                    "Your Answer: <input class='ansElement' type='number' name='ans'>"+
+                    "<input class='ansButton' type='button' name='answer' value='submit' onclick ='textAnswer()'>"
+            }
 
         }
         else {
@@ -119,9 +125,10 @@ function question() {
 }
 
 function textAnswer() {
-    var ansForm = document.getElementsByClassName("ansForm");
-    var ans = ansForm.elements[0].value;
-    if (ansForm.elements[0] === undefined)
+    var ansForm = document.getElementsByClassName("ansElement");
+    var ans = ansForm[0].value;
+    console.log(ans);
+    if (ansForm[0].value === undefined)
         alert("Type an answer");
     else{
         answer(ans);
@@ -132,10 +139,11 @@ function textAnswer() {
 function mcqAnswer() {
     //Get answer from The user
     var ansForm = document.getElementsByClassName("ansForm");
-    for(let i = 0; i < ansForm.length; i++){
-        if(ansForm.elements[i].checked)
-            var ans = ansForm.elements[i].value;
+    for(let i = 0; i < ansForm[0].length; i++){
+        if(ansForm[0].elements[i].checked)
+            var ans = ansForm[0].elements[i].value;
     }
+    console.log(ans);
     answer(ans);
 
 }
@@ -147,8 +155,9 @@ function answer(ans) {
         if (this.readyState === 4 && this.status === 200) {
             //TODO If response received (success).
             object = JSON.parse(this.responseText);
-            if(object.correct === "true")
-                location.href("questions.html")
+            console.log(object.correct);
+            if(object.correct === true)
+                location.reload();
         }
         else {
             //TODO If response not received (error).
