@@ -38,7 +38,10 @@ function list() {
                 treasureHunt.appendChild(thLink);
                 treasureHuntsDiv.appendChild(treasureHunt);
             }
-            document.cookie = object.treasureHunts[0].uuid;
+            document.cookie = "uuid=" + object.treasureHunts[0].uuid;
+            console.log(getCookie("uuid"));
+            console.log(document.cookie);
+
         }
         else {
             //TODO If response not received (error).
@@ -66,7 +69,7 @@ function start(uName, appName) {
                 alert(object.errorMessages);
             }
             else {
-                document.cookie = object.session;
+                document.cookie = "session=" + object.session;
                 window.location.href = "questions.html";
             }
         }
@@ -75,7 +78,7 @@ function start(uName, appName) {
         }
     };
 
-    xhttp.open("GET", "https://codecyprus.org/th/api/start?player=" + uName + "&app=" + appName + "&treasure-hunt-id=" + document.cookie, true);
+    xhttp.open("GET", "https://codecyprus.org/th/api/start?player=" + uName + "&app=" + appName + "&treasure-hunt-id=" + getCookie("uuid"), true);
     xhttp.send();
 }
 
@@ -103,14 +106,14 @@ function question() {
             else if(object.questionType === "TEXT"){
                 let qDiv = document.getElementById("questionType");
                 qDiv.innerHTML = "<form class='ansForm'>" +
-                "Your Answer: <input class='ansElement' type='text' name='ans' title='Text goes here...'>"+
+                "Your Answer: <input class='ansElement' type='text' name='ans' placeholder='Answer here...'>"+
                 "<input class='ansButton' type='button' name='answer' value='submit' onclick ='textAnswer()'>"
             }
 
             else if(object.questionType === "INTEGER"){
                 let qDiv = document.getElementById("questionType");
                 qDiv.innerHTML = "<form class='ansForm'>" +
-                    "Your Answer: <input class='ansElement' type='number' step='number' name='ans'>"+
+                    "Your Answer: <input class='ansElement' type='number' step='number' name='ans' placeholder='Answer here...'>"+
                     "<input class='ansButton' type='button' name='answer' value='submit' onclick ='textAnswer()'>"
             }
 
@@ -135,7 +138,7 @@ function question() {
         }
     };
 
-    xhttp.open("GET", "https://codecyprus.org/th/api/question?session=" + document.cookie, true);
+    xhttp.open("GET", "https://codecyprus.org/th/api/question?session=" + getCookie("session"), true);
     xhttp.send();
 }
 
@@ -159,6 +162,9 @@ function mcqAnswer() {
             var ans = ansForm[0].elements[i].value;
     }
     console.log(ans);
+    if(ans === undefined)
+        alert("Choose an answer.");
+    else
     answer(ans);
 
 }
@@ -173,21 +179,35 @@ function answer(ans) {
             console.log(object.correct);
             if(object.correct === true)
                 location.reload();
+            else{
+                alert("Wrong, Try again.")
+            }
         }
         else {
             //TODO If response not received (error).
         }
     };
-    xhttp.open("GET", "https://codecyprus.org/th/api/answer?session=" + document.cookie + "&answer=" + ans, true);
+    xhttp.open("GET", "https://codecyprus.org/th/api/answer?session=" + getCookie("session") + "&answer=" + ans, true);
     xhttp.send();
 }
 
 //If cookie exists then direct to questions (still in development)
 function checkSession() {
-    if (document.cookie !== "")
+    console.log(getCookie("session"));
+    if (getCookie("session") !== undefined){
+        if(confirm('You left a game in progress! Do you want to resume?')){
         window.location.href = "questions.html";
+        }
+        else{
+            //Expire the session cookie.
+            document.cookie = "session=" + getCookie("session") + "; expires=Thu, 01 Jan 2000 00:00:01 GMT";
+        }
+    }
+}
 
-
-
-
+//function to access a specific cookie by name from stack overflow.
+function getCookie(name) {
+    var value = "; " + document.cookie;
+    var parts = value.split("; " + name + "=");
+    if (parts.length === 2) return parts.pop().split(";").shift();
 }
