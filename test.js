@@ -88,11 +88,13 @@ function question() {
         if (this.readyState === 4 && this.status === 200) {
             //TODO If response received (success).
             object = JSON.parse(this.responseText);
+            if (object.requiresLocation === true)
+                getLocation();
             console.log(object);
             var qText = document.getElementById("questionText");
             qText.innerHTML = "<p id='qText'>" + object.questionText + "</p>";
 
-            if(object.questionType === "MCQ"){
+            if (object.questionType === "MCQ") {
                 let qDiv = document.getElementById("questionType");
                 qDiv.innerHTML = "<form class='ansForm'>" +
                     "A<input type='radio' name='ans' value='A'>" +
@@ -103,33 +105,38 @@ function question() {
                     "</form>";
             }
 
-            else if(object.questionType === "TEXT"){
+            else if (object.questionType === "TEXT") {
                 let qDiv = document.getElementById("questionType");
                 qDiv.innerHTML = "<form class='ansForm'>" +
-                "Your Answer: <input class='ansElement' type='text' name='ans' placeholder='Answer here...'>"+
-                "<input class='ansButton' type='button' name='answer' value='submit' onclick ='textAnswer()'>"
+                    "Your Answer: <input class='ansElement' type='text' name='ans' placeholder='Answer here...'>" +
+                    "<input class='ansButton' type='button' name='answer' value='submit' onclick ='textAnswer()'>" +
+                    "<input type='button' name='skip' value='skip' onclick ='canSkip()'>" + "</form>";
+
             }
 
-            else if(object.questionType === "INTEGER"){
+            else if (object.questionType === "INTEGER") {
                 let qDiv = document.getElementById("questionType");
                 qDiv.innerHTML = "<form class='ansForm'>" +
-                    "Your Answer: <input class='ansElement' type='number' step='number' name='ans' placeholder='Answer here...'>"+
-                    "<input class='ansButton' type='button' name='answer' value='submit' onclick ='textAnswer()'>"
+                    "Your Answer: <input class='ansElement' type='number' step='number' name='ans' placeholder='Answer here...'>" +
+                    "<input class='ansButton' type='button' name='answer' value='submit' onclick ='textAnswer()'>" +
+                    "<input type='button' name='skip' value='skip' onclick ='canSkip()'>" + "</form>";
             }
 
-            else if(object.questionType === "BOOLEAN"){
+            else if (object.questionType === "BOOLEAN") {
                 let qDiv = document.getElementById("questionType");
                 qDiv.innerHTML = "<form class='ansForm'>" +
                     "true<input type='radio' name='ans' value='true'>" +
                     "false<input type='radio' name='ans' value='false'>" +
-                    "<input class='ansButton' type='button' name='answer' value='submit' onclick ='mcqAnswer()'>"
+                    "<input class='ansButton' type='button' name='answer' value='submit' onclick ='mcqAnswer()'>" +
+                    "<input type='button' name='skip' value='skip' onclick ='canSkip()'>" + "</form>";
             }
 
-            else if(object.questionType === "NUMERIC"){
+            else if (object.questionType === "NUMERIC") {
                 let qDiv = document.getElementById("questionType");
                 qDiv.innerHTML = "<form class='ansForm'>" +
-                    "Your Answer: <input class='ansElement' type='number' step='any' name='ans'>"+
-                    "<input class='ansButton' type='button' name='answer' value='submit' onclick ='textAnswer()'>"
+                    "Your Answer: <input class='ansElement' type='number' step='any' name='ans'>" +
+                    "<input class='ansButton' type='button' name='answer' value='submit' onclick ='textAnswer()'>" +
+                    "<input type='button' name='skip' value='skip' onclick ='canSkip()'>" + "</form>";
             }
 
         }
@@ -142,30 +149,32 @@ function question() {
     xhttp.send();
 }
 
+//Handles text,number and numeric questions.
 function textAnswer() {
     var ansForm = document.getElementsByClassName("ansElement");
     var ans = ansForm[0].value;
     console.log(ans);
     if (ansForm[0].value === "")
         alert("Type an answer");
-    else{
+    else {
         answer(ans);
     }
 
 }
 
+//Handles yes/no and multiple choice questions.
 function mcqAnswer() {
     //Get answer from The user
     var ansForm = document.getElementsByClassName("ansForm");
-    for(let i = 0; i < ansForm[0].length; i++){
-        if(ansForm[0].elements[i].checked)
+    for (let i = 0; i < ansForm[0].length; i++) {
+        if (ansForm[0].elements[i].checked)
             var ans = ansForm[0].elements[i].value;
     }
     console.log(ans);
-    if(ans === undefined)
+    if (ans === undefined)
         alert("Choose an answer.");
     else
-    answer(ans);
+        answer(ans);
 
 }
 
@@ -177,10 +186,11 @@ function answer(ans) {
             //TODO If response received (success).
             object = JSON.parse(this.responseText);
             console.log(object.correct);
-            if(object.correct === true)
+            if (object.correct === true)
                 location.reload();
-            else{
-                alert("Wrong, Try again.")
+            else {
+                alert("Wrong, -3 points, Try again.");
+                score();
             }
         }
         else {
@@ -191,21 +201,93 @@ function answer(ans) {
     xhttp.send();
 }
 
+//Shows the name of the player and their score.
+function score() {
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
+        if (this.readyState === 4 && this.status === 200) {
+            //TODO If response received (success).
+            object = JSON.parse(this.responseText);
+            var scoreDiv = document.getElementById("score");
+            scoreDiv.innerHTML = "<p>" + 'Player: ' + object.player + ' Score: ' + object.score + "</p>";
+        }
+        else {
+            //TODO If response not received (error).
+        }
+    };
+    xhttp.open("GET", "https://codecyprus.org/th/api/score?session=" + getCookie("session"), true);
+    xhttp.send();
+}
+
+//Checks whether the question can be skipped.
+function canSkip() {
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
+        if (this.readyState === 4 && this.status === 200) {
+            //TODO If response received (success).
+            object = JSON.parse(this.responseText);
+            if (object.canBeSkipped === true) {
+                skipq()
+            }
+            else {
+                alert("This question can not be skipped.")
+            }
+        }
+        else {
+            //TODO If response not received (error).
+        }
+    };
+    xhttp.open("GET", "https://codecyprus.org/th/api/question?session=" + getCookie("session"), true);
+    xhttp.send();
+}
+
+function skipq() {
+    if (confirm('You will lose 5 points, are you sure you want to skip?')) {
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+            if (this.readyState === 4 && this.status === 200) {
+                //TODO If response received (success).
+                location.reload();
+            }
+            else {
+                //TODO If response not received (error).
+            }
+        };
+        xhttp.open("GET", "https://codecyprus.org/th/api/skip?session=" + getCookie("session"), true);
+        xhttp.send();
+    }
+}
+
+function getLocation() {
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
+        if (this.readyState === 4 && this.status === 200) {
+            //TODO If response received (success).
+        }
+        else {
+            //TODO If response not received (error).
+        }
+    };
+    //TODO get actual location from mobile device.
+    xhttp.open("GET", "https://codecyprus.org/th/api/location?session=" + getCookie("session") + "&latitude=34" + "&longitude=33", true);
+    xhttp.send();
+}
+
 //If cookie exists then direct to questions (still in development)
 function checkSession() {
     console.log(getCookie("session"));
-    if (getCookie("session") !== undefined){
-        if(confirm('You left a game in progress! Do you want to resume?')){
-        window.location.href = "questions.html";
+    if (getCookie("session") !== undefined) {
+        if (confirm('You left a game in progress! Do you want to resume?')) {
+            window.location.href = "questions.html";
         }
-        else{
+        else {
             //Expire the session cookie.
             document.cookie = "session=" + getCookie("session") + "; expires=Thu, 01 Jan 2000 00:00:01 GMT";
         }
     }
 }
 
-//function to access a specific cookie by name from stack overflow.
+//function to access the value of a specific cookie by name from stack overflow.
 function getCookie(name) {
     var value = "; " + document.cookie;
     var parts = value.split("; " + name + "=");
