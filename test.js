@@ -1,28 +1,3 @@
-function leaderboard() {
-    var xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function () {
-        if (this.readyState === 4 && this.status === 200) {
-            //TODO If response received (success).
-            object = JSON.parse(this.responseText);
-            console.log(object.leaderboard);
-            for (let i = 0; i < object.numOfPlayers; i++) {
-                var leaderboards = document.getElementById("lead");
-                var leaderboardindex = document.createElement("p");
-                leaderboardindex.innerHTML = "Position: " + (i + 1) + "<br>" + " Name: " + object.leaderboard[i].player + "<br>";
-                leaderboardindex.innerHTML += " Score: " + object.leaderboard[i].score;
-                leaderboards.appendChild(leaderboardindex);
-            }
-
-        }
-        else {
-            //TODO If response not received (error).
-        }
-    };
-
-    xhttp.open("GET", "https://codecyprus.org/th/api/leaderboard?session=ag9nfmNvZGVjeXBydXNvcmdyFAsSB1Nlc3Npb24YgICAoMa0gQoM&sorted&limit=10", true);
-    xhttp.send();
-}
-
 function list() {
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
@@ -88,11 +63,19 @@ function question() {
         if (this.readyState === 4 && this.status === 200) {
             //TODO If response received (success).
             object = JSON.parse(this.responseText);
+            //If the questions are over send to leaderboard page.
+            if (object.currentQuestionIndex === object.numOfQuestions){
+                document.cookie = "session=" + getCookie("session") + "; expires=Thu, 01 Jan 2000 00:00:01 GMT";
+                window.location.href = "leaderboard.html";
+            }
+            //Get location if needed
             if (object.requiresLocation === true)
                 getLocation();
             console.log(object);
             var qText = document.getElementById("questionText");
             qText.innerHTML = "<p id='qText'>" + object.questionText + "</p>";
+
+
 
             if (object.questionType === "MCQ") {
                 let qDiv = document.getElementById("questionType");
@@ -102,6 +85,7 @@ function question() {
                     "C<input type='radio' name='ans' value='C'>" +
                     "D<input type='radio' name='ans' value='D'>" +
                     "<input class='ansButton' type='button' name='answer' value='submit' onclick ='mcqAnswer()'>" +
+                    "<input type='button' name='skip' value='skip' onclick ='canSkip()'>" +
                     "</form>";
             }
 
@@ -258,7 +242,20 @@ function skipq() {
     }
 }
 
+//Still a work in progress
 function getLocation() {
+    if (navigator.geolocation) {
+
+        console.log(navigator.geolocation.getCurrentPosition(location));
+
+      }
+
+      function location(location){
+          console.log(location.coords.longitude);
+          console.log(location.coords.latitude);
+
+    }
+}
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
         if (this.readyState === 4 && this.status === 200) {
@@ -269,7 +266,31 @@ function getLocation() {
         }
     };
     //TODO get actual location from mobile device.
-    xhttp.open("GET", "https://codecyprus.org/th/api/location?session=" + getCookie("session") + "&latitude=34" + "&longitude=33", true);
+    xhttp.open("GET", "https://codecyprus.org/th/api/location?session=" + getCookie("session") + "&latitude=35.00829" + "&longitude=33.697047", true);
+    xhttp.send();
+
+function leaderboard() {
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
+        if (this.readyState === 4 && this.status === 200) {
+            //TODO If response received (success).
+            object = JSON.parse(this.responseText);
+            console.log(object.leaderboard);
+            for (let i = 0; i < object.numOfPlayers; i++) {
+                var leaderboards = document.getElementById("lead");
+                var leaderboardindex = document.createElement("p");
+                leaderboardindex.innerHTML = "Position: " + (i + 1) + "<br>" + " Name: " + object.leaderboard[i].player + "<br>";
+                leaderboardindex.innerHTML += " Score: " + object.leaderboard[i].score;
+                leaderboards.appendChild(leaderboardindex);
+            }
+
+        }
+        else {
+            //TODO If response not received (error).
+        }
+    };
+
+    xhttp.open("GET", "https://codecyprus.org/th/api/leaderboard?treasure-hunt-id=" + getCookie("uuid") + "&sorted&limit=10", true);
     xhttp.send();
 }
 
