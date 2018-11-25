@@ -110,7 +110,22 @@ function question() {
             else if(object.questionType === "INTEGER"){
                 let qDiv = document.getElementById("questionType");
                 qDiv.innerHTML = "<form class='ansForm'>" +
-                    "Your Answer: <input class='ansElement' type='number' name='ans'>"+
+                    "Your Answer: <input class='ansElement' type='number' step='number' name='ans'>"+
+                    "<input class='ansButton' type='button' name='answer' value='submit' onclick ='textAnswer()'>"
+            }
+
+            else if(object.questionType === "BOOLEAN"){
+                let qDiv = document.getElementById("questionType");
+                qDiv.innerHTML = "<form class='ansForm'>" +
+                    "true<input type='radio' name='ans' value='true'>" +
+                    "false<input type='radio' name='ans' value='false'>" +
+                    "<input class='ansButton' type='button' name='answer' value='submit' onclick ='mcqAnswer()'>"
+            }
+
+            else if(object.questionType === "NUMERIC"){
+                let qDiv = document.getElementById("questionType");
+                qDiv.innerHTML = "<form class='ansForm'>" +
+                    "Your Answer: <input class='ansElement' type='number' step='any' name='ans'>"+
                     "<input class='ansButton' type='button' name='answer' value='submit' onclick ='textAnswer()'>"
             }
 
@@ -128,7 +143,7 @@ function textAnswer() {
     var ansForm = document.getElementsByClassName("ansElement");
     var ans = ansForm[0].value;
     console.log(ans);
-    if (ansForm[0].value === undefined)
+    if (ansForm[0].value === "")
         alert("Type an answer");
     else{
         answer(ans);
