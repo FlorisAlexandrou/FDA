@@ -3,6 +3,7 @@ html {
     background-size: cover;
     position: relative;
     text-align: center; /*Of the whole website*/
+
 }
 
 img { /* All the images including the logo images, images on home page and images that i have use as titles */
@@ -16,6 +17,7 @@ img { /* All the images including the logo images, images on home page and image
 h1{
     text-decoration: underline;
     color: white;
+    text-shadow: 2px 2px black;
 }
 .Instructions {
     background-color: antiquewhite;
@@ -36,4 +38,23 @@ h1{
 
 #qText{
     font-size: 120%;
+}
+#treasureHunt
+{
+    background-color: beige;
+    height: auto;
+    width: 70% ;
+    color: black;
+    border: solid black 2px;
+    transform: translate(19%, 0%);
+
+}
+#lead
+{
+    background-color: beige;
+    height: auto;
+    width: 70% ;
+    color: black;
+    border: solid black 2px;
+    transform: translate(19%, 0%);
 }
