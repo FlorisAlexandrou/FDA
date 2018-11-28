@@ -58,3 +58,16 @@ h1{
     border: solid black 2px;
     transform: translate(19%, 0%);
 }
+.ParDesign
+{
+    border: solid black 2px;
+    background-color: beige;
+    padding: 5px;
+    font-size: 40px;
+
+}
+
+#sbutton
+{
+    font-size: 40px;
+}
