@@ -76,3 +76,16 @@ h1{
   top: 3%;
   left: 5%;
 }
+
+#preview{
+    border: solid black 2px;
+}
+
+#content{
+    margin: 20px;
+    padding: 20px;
+    background-color: beige;
+    border: solid black 2px;
+    color: black;
+    text-align: center;
+}
