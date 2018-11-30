@@ -21,8 +21,7 @@ h1{
 }
 .Instructions {
     background-color: antiquewhite;
-    border: solid 2px;
-    border-color: black;
+    border: 2px solid black;
 }
 .Identity{
     font-size: 40px;
@@ -35,11 +34,10 @@ h1{
     font-size: 150%;
 }
 
-#qText{
+#qText, #score{
     font-size: 120%;
 }
-#treasureHunt
-{
+#treasureHunt {
     background-color: beige;
     height: auto;
     width: 70% ;
@@ -48,6 +46,12 @@ h1{
     transform: translate(19%, 0%);
 
 }
+
+#treasureHunt a{
+    text-decoration: none;
+    font-size: 130%;
+}
+
 #lead
 {
     background-color: beige;
@@ -66,17 +70,68 @@ h1{
 
 }
 
-#sbutton
-{
-    font-size: 40px;
+#username{
+    font-size: 100%;
+}
+
+#sbutton {
+    font-size: 20px;
+}
+
+.radioButton{
+    width: 18px;
+    height: 18px;
+}
+
+#loginForm{
+    font-size: 130%;
+}
+
+.ansForm{
+font-size: 130%;
+}
+
+.ansElement{
+    font-size: 80%;
+    margin: 3%;
+}
+
+.ansButton{
+    font-size: 100%;
+    width: 75px;
+    height: 35px;
+    margin: 3%;
+}
+
+.skipButton{
+    font-size: 100%;
+    width: 75px;
+    height: 35px;
+    margin: 3%;
+}
+
+#QRButtonDiv button{
+    position: absolute;
+    top: 3%;
+    left: 2%;
+    font-size: 80%;
+    width: 75px;
+    height: 35px;
+}
+
+#indexButtons button{
+    font-size: 120%;
+    margin: 1.5%;
 }
 
 .homeButton{
-  position: absolute;
-  top: 3%;
-  left: 5%;
+    position: absolute;
+    top: 3%;
+    left: 3%;
+    font-size: 120%;
 }
 
+/*Camera for QR*/
 #preview{
     border: solid black 2px;
 }

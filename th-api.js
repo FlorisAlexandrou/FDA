@@ -85,47 +85,47 @@ function question() {
             if (object.questionType === "MCQ") {
                 let qDiv = document.getElementById("questionType");
                 qDiv.innerHTML = "<form class='ansForm'>" +
-                    "A<input type='radio' name='ans' value='A'>" +
-                    "B<input type='radio' name='ans' value='B'>" +
-                    "C<input type='radio' name='ans' value='C'>" +
-                    "D<input type='radio' name='ans' value='D'>" +
+                    "A<input class='radioButton' type='radio' name='ans' value='A'>" +
+                    "B<input class='radioButton' type='radio' name='ans' value='B'>" +
+                    "C<input class='radioButton' type='radio' name='ans' value='C'>" +
+                    "D<input class='radioButton' type='radio' name='ans' value='D'>" +
                     "<input class='ansButton' type='button' name='answer' value='submit' onclick ='mcqAnswer()'>" +
-                    "<input type='button' name='skip' value='skip' onclick ='canSkip()'>" +
+                    "<input class='skipButton' type='button' name='skip' value='skip' onclick ='canSkip()'>" +
                     "</form>";
             }
 
             else if (object.questionType === "TEXT") {
                 let qDiv = document.getElementById("questionType");
                 qDiv.innerHTML = "<form class='ansForm'>" +
-                    "Your Answer: <input class='ansElement' type='text' name='ans' placeholder='Answer here...'>" +
+                    "Your Answer: <input class='ansElement' type='text' name='ans' placeholder='Answer here...'>" + "<br>" +
                     "<input class='ansButton' type='button' name='answer' value='submit' onclick ='textAnswer()'>" +
-                    "<input type='button' name='skip' value='skip' onclick ='canSkip()'>" + "</form>";
+                    "<input class='skipButton' type='button' name='skip' value='skip' onclick ='canSkip()'>" + "</form>";
 
             }
 
             else if (object.questionType === "INTEGER") {
                 let qDiv = document.getElementById("questionType");
                 qDiv.innerHTML = "<form class='ansForm'>" +
-                    "Your Answer: <input class='ansElement' type='number' step='number' name='ans' placeholder='Answer here...'>" +
+                    "Your Answer: <input class='ansElement' type='number' step='number' name='ans' placeholder='Answer here...'>" + "<br>" +
                     "<input class='ansButton' type='button' name='answer' value='submit' onclick ='textAnswer()'>" +
-                    "<input type='button' name='skip' value='skip' onclick ='canSkip()'>" + "</form>";
+                    "<input class='skipButton' type='button' name='skip' value='skip' onclick ='canSkip()'>" + "</form>";
             }
 
             else if (object.questionType === "BOOLEAN") {
                 let qDiv = document.getElementById("questionType");
                 qDiv.innerHTML = "<form class='ansForm'>" +
-                    "true<input type='radio' name='ans' value='true'>" +
-                    "false<input type='radio' name='ans' value='false'>" +
-                    "<input class='ansButton' type='button' name='answer' value='submit' onclick ='mcqAnswer()'>" +
-                    "<input type='button' name='skip' value='skip' onclick ='canSkip()'>" + "</form>";
+                    "true<input class='radioButton' type='radio' name='ans' value='true'>" +
+                    "false<input class='radioButton' type='radio' name='ans' value='false'>" +
+                    "<input class='ansButton' type='button' name='answer' value='submit' onclick ='mcqAnswer()'>" + "<br>" +
+                    "<input class='skipButton' type='button' name='skip' value='skip' onclick ='canSkip()'>" + "</form>";
             }
 
             else if (object.questionType === "NUMERIC") {
                 let qDiv = document.getElementById("questionType");
                 qDiv.innerHTML = "<form class='ansForm'>" +
                     "Your Answer: <input class='ansElement' type='number' step='any' name='ans'>" +
-                    "<input class='ansButton' type='button' name='answer' value='submit' onclick ='textAnswer()'>" +
-                    "<input type='button' name='skip' value='skip' onclick ='canSkip()'>" + "</form>";
+                    "<input class='ansButton' type='button' name='answer' value='submit' onclick ='textAnswer()'>" + "<br>" +
+                    "<input class='skipButton' type='button' name='skip' value='skip' onclick ='canSkip()'>" + "</form>";
             }
 
         }
@@ -198,7 +198,7 @@ function score() {
             //TODO If response received (success).
             object = JSON.parse(this.responseText);
             var scoreDiv = document.getElementById("score");
-            scoreDiv.innerHTML = "<p>" + 'Player: ' + object.player + ' Score: ' + object.score + "</p>";
+            scoreDiv.innerHTML ="<p>" + 'Player: ' + object.player + "<br>" + ' Score: ' + object.score + "</p>";
         }
         else {
             //TODO If response not received (error).
