@@ -35,10 +35,26 @@
     <p class="testingFunctions">List function call testing.</p>
     <input type="number" id="listTestingNumber" placeholder="Number of treasure hunts...">
     <button id="listTestingButton" onclick="listTest()">Call List</button>
-    <button id="clearList" onclick="clearList()">Clear Display</button>
-    <div id="listTesting">Response will appear here :)</div>
+    <button class="clearDisplays" onclick="clearDisplays('listTestingDisplay')">Clear Display</button>
+    <div class="testingDisplay" id="listTestingDisplay">List response will appear here :)</div>
     <br>
     <p class="testingFunctions">Start function call testing.</p>
+    Parameter:
+    <select id="startTestParameters">
+        <option value="inactive">INACTIVE</option>
+        <option value="empty">EMPTY</option>
+        <option value="player">PLAYER</option>
+        <option value="app">APP</option>
+        <option value="unknown">UNKNOWN</option>
+        <option value="missing_parameter">MISSING_PARAMETER</option>
+        <option value="">NO PARAMETER</option>
+    </select>
+    <button id="startTestingButton" onclick="startTest()">Call Start</button>
+    <button class="clearDisplays" onclick="clearDisplays('startTestingDisplay')">Clear Display</button>
+    <div class="testingDisplay" id="startTestingDisplay">Start response will appear here :)</div>
+    <br>
+    <p class="testingFunctions">Question function call testing.</p>
+    <div class="testingDisplay" id="questionTestingDisplay">Question response will appear here :)</div>
 </div>
 <script src="th-testing-api.js"></script>
 </body>
