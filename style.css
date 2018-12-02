@@ -161,7 +161,7 @@ font-size: 130%;
     text-decoration: underline;
 }
 
-#listTesting{
+.testingDisplay{
     margin: 20px;
     padding: 10px;
     border: solid black 2px;
@@ -181,7 +181,8 @@ font-size: 130%;
 
 .googleplusimg {
     margin: auto;
-    width: 30%;
+    width: 15%;
+
 }
 
 .testingFunctions{
