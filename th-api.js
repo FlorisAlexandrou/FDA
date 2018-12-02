@@ -11,13 +11,13 @@ function list() {
                 var thLink = document.createElement("a");
                 thLink.innerHTML = (i + 1) + ". " + object.treasureHunts[i].name;
                 thLink.href = "identity.html";
+                thLink.onclick = function setCookie() {
+                    document.cookie = "uuid=" + object.treasureHunts[i].uuid
+                };
+                console.log(document.cookie);
                 treasureHunt.appendChild(thLink);
                 treasureHuntsDiv.appendChild(treasureHunt);
             }
-            document.cookie = "uuid=" + object.treasureHunts[0].uuid;
-            console.log(getCookie("uuid"));
-            console.log(document.cookie);
-
         }
         else {
             //TODO If response not received (error).
@@ -88,7 +88,7 @@ function question() {
                     "A<input class='radioButton' type='radio' name='ans' value='A'>" +
                     "B<input class='radioButton' type='radio' name='ans' value='B'>" +
                     "C<input class='radioButton' type='radio' name='ans' value='C'>" +
-                    "D<input class='radioButton' type='radio' name='ans' value='D'>" +
+                    "D<input class='radioButton' type='radio' name='ans' value='D'>" + "<br>" +
                     "<input class='ansButton' type='button' name='answer' value='submit' onclick ='mcqAnswer()'>" +
                     "<input class='skipButton' type='button' name='skip' value='skip' onclick ='canSkip()'>" +
                     "</form>";

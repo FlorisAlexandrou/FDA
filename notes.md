@@ -18,3 +18,7 @@ We made a meeting and did significant group work.
 We almost finished implementing the javascript code for the api.
 ####27/11/18
 We made another meeting to finalize our work and discuss about testing.
+####1/12/18
+We fixed our UI for usability and initialised testing page.
+####2/12/18
+We further developed testing and added more information in landing page.

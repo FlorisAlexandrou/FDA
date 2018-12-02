@@ -112,8 +112,8 @@ font-size: 130%;
 
 #QRButtonDiv button{
     position: absolute;
-    top: 3%;
-    left: 2%;
+    top: 4%;
+    left: 3%;
     font-size: 80%;
     width: 75px;
     height: 35px;
@@ -145,6 +145,11 @@ font-size: 130%;
     text-align: center;
 }
 
+#questionDisplay{
+    background-color: beige;
+    border: solid black 2px;
+}
+
 #testDiv{
     background-color: beige;
     border: solid black 2px;
@@ -154,6 +159,12 @@ font-size: 130%;
 
 #testDiv h4{
     text-decoration: underline;
+}
+
+#listTesting{
+    margin: 20px;
+    padding: 10px;
+    border: solid black 2px;
 }
 
 #desc{
@@ -171,5 +182,9 @@ font-size: 130%;
 .googleplusimg {
     margin: auto;
     width: 30%;
+}
+
+.testingFunctions{
+    font-style: italic;
 }
 
