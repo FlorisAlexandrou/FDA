@@ -14,7 +14,7 @@
     <p>
         The product to be tested is a treasure hunt web application targeting mobile devices. It requests data from "code
         cyprus" web server to implement the functions for the application. At a very high level, the functions consist of
-        requesting certain questions,receiving answers from the user, calculate the score and show
+        requesting certain questions,receiving answers from the user, calculating the score and showing
         the leaderboard.
     </p>
 
@@ -31,13 +31,19 @@
     <h4>Error Management</h4>
     <p>(How are the bugs going to be handled? (e.g which tester will report to which developer))</p>
 
-    <h4>Unit Testing</h4>
+    <h2>Unit Testing</h2>
+
+    <!--List function call Testing -->
     <p class="testingFunctions">List function call testing.</p>
+    Parameter:
     <input type="number" id="listTestingNumber" placeholder="Number of treasure hunts...">
-    <button id="listTestingButton" onclick="listTest()">Call List</button>
+    <br>
+    <button onclick="listTest()">Call List</button>
     <button class="clearDisplays" onclick="clearDisplays('listTestingDisplay')">Clear Display</button>
     <div class="testingDisplay" id="listTestingDisplay">List response will appear here :)</div>
     <br>
+
+    <!--Start function call Testing -->
     <p class="testingFunctions">Start function call testing.</p>
     Parameter:
     <select id="startTestParameters">
@@ -49,12 +55,51 @@
         <option value="missing_parameter">MISSING_PARAMETER</option>
         <option value="">NO PARAMETER</option>
     </select>
-    <button id="startTestingButton" onclick="startTest()">Call Start</button>
+    <br>
+    <button onclick="startTest()">Call Start</button>
     <button class="clearDisplays" onclick="clearDisplays('startTestingDisplay')">Clear Display</button>
     <div class="testingDisplay" id="startTestingDisplay">Start response will appear here :)</div>
     <br>
+
+    <!--Question function call Testing -->
     <p class="testingFunctions">Question function call testing.</p>
+    Parameters: <br>
+    <select id="questionTestParameters">
+        <option value="boolean">BOOLEAN</option>
+        <option value="mcq">MCQ</option>
+        <option value="integer">INTEGER</option>
+        <option value="numeric">NUMERIC</option>
+        <option value="text">TEXT</option>
+        <option value="">NO PARAMETER</option>
+    </select>
+    <br>
+    Th completed
+    <input  type="checkbox" id="qthCompleted">
+    <br>
+    Can be Skipped
+    <input  type="checkbox" id="canBeSkipped">
+    <br>
+    Requires Location
+    <input  type="checkbox" id="requiresLocation">
+    <br>
+    <button onclick="questionTest()">Call Question</button>
+    <button class="clearDisplays" onclick="clearDisplays('questionTestingDisplay')">Clear Display</button>
     <div class="testingDisplay" id="questionTestingDisplay">Question response will appear here :)</div>
+    <br>
+
+    <!--Answer function call Testing -->
+    <p class="testingFunctions">Answer function call testing.</p>
+    Parameters: <br>
+    Correct
+    <input type="checkbox" id="correct" >
+    <br>
+    Th completed
+    <input  type="checkbox" id="athCompleted">
+    <br>
+    <button onclick="answerTest()">Call Answer</button>
+    <button class="clearDisplays" onclick="clearDisplays('answerTestingDisplay')">Clear Display</button>
+    <div class="testingDisplay" id="answerTestingDisplay">Answer response will appear here :)</div>
+
 </div>
 <script src="th-testing-api.js"></script>
 </body>
