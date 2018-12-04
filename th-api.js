@@ -114,16 +114,16 @@ function question() {
                 let qDiv = document.getElementById("questionType");
                 qDiv.innerHTML = "<form class='ansForm'>" +
                     "true<input class='radioButton' type='radio' name='ans' value='true'>" +
-                    "false<input class='radioButton' type='radio' name='ans' value='false'>" +
-                    "<input class='ansButton' type='button' name='answer' value='submit' onclick ='mcqAnswer()'>" + "<br>" +
+                    "false<input class='radioButton' type='radio' name='ans' value='false'>" + "<br>" +
+                    "<input class='ansButton' type='button' name='answer' value='submit' onclick ='mcqAnswer()'>" +
                     "<input class='skipButton' type='button' name='skip' value='skip' onclick ='canSkip()'>" + "</form>";
             }
 
             else if (object.questionType === "NUMERIC") {
                 let qDiv = document.getElementById("questionType");
                 qDiv.innerHTML = "<form class='ansForm'>" +
-                    "Your Answer: <input class='ansElement' type='number' step='any' name='ans'>" +
-                    "<input class='ansButton' type='button' name='answer' value='submit' onclick ='textAnswer()'>" + "<br>" +
+                    "Your Answer: <input class='ansElement' type='number' step='any' name='ans'>" + "<br>" +
+                    "<input class='ansButton' type='button' name='answer' value='submit' onclick ='textAnswer()'>" +
                     "<input class='skipButton' type='button' name='skip' value='skip' onclick ='canSkip()'>" + "</form>";
             }
 
@@ -166,7 +166,7 @@ function mcqAnswer() {
 
 }
 
-
+//Send answer to server and handles response.
 function answer(ans) {
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
