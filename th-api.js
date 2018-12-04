@@ -64,11 +64,6 @@ function question() {
             //TODO If response received (success).
             object = JSON.parse(this.responseText);
 
-            //Show current question number / last question number.
-            var currentQuestion = parseInt(object.currentQuestionIndex) + 1;
-            var scoreDiv = document.getElementById("score");
-            scoreDiv.innerHTML+= "Questions: " + currentQuestion + "/" + object.numOfQuestions;
-
             //If the questions are over send to leaderboard page.
             if (object.currentQuestionIndex === object.numOfQuestions){
                 document.cookie = "session=" + getCookie("session") + "; expires=Thu, 01 Jan 2000 00:00:01 GMT";
@@ -76,8 +71,12 @@ function question() {
             }
 
             //Get location if needed
-            if (object.requiresLocation === true)
-                getLocation();
+            if (object.requiresLocation === true){
+                if(confirm("This questions requires Location, Do you wish to give your location?")){
+                    getLocation();
+                }
+            }
+
             var qText = document.getElementById("questionText");
             qText.innerHTML = "<p id='qText'>" + object.questionText + "</p>";
 
@@ -151,7 +150,7 @@ function textAnswer() {
 
 }
 
-//Handles yes/no and multiple choice questions.
+//Handles boolean and multiple choice questions.
 function mcqAnswer() {
     //Get answer from The user
     var ansForm = document.getElementsByClassName("ansForm");
@@ -206,6 +205,23 @@ function score() {
     };
     xhttp.open("GET", "https://codecyprus.org/th/api/score?session=" + getCookie("session"), true);
     xhttp.send();
+
+    //Show current question number / last question number.
+    xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
+        if (this.readyState === 4 && this.status === 200) {
+            //TODO If response received (success).
+            object = JSON.parse(this.responseText);
+            var currentQuestion = parseInt(object.currentQuestionIndex) + 1;
+            var scoreDiv = document.getElementById("score");
+            scoreDiv.innerHTML+= "Questions: " + currentQuestion + "/" + object.numOfQuestions;
+        }
+        else {
+            //TODO If response not received (error).
+        }
+    };
+    xhttp.open("GET", "https://codecyprus.org/th/api/question?session=" + getCookie("session"), true);
+    xhttp.send();
 }
 
 //Checks whether the question can be skipped.
@@ -250,7 +266,7 @@ function skipq() {
 
 //Get the location from the client.
 function getLocation() {
-    navigator.geolocation.getCurrentPosition(showPosition);
+        navigator.geolocation.getCurrentPosition(showPosition);
     function showPosition(position) {
         console.log("lat: " + position.coords.latitude);
         console.log("lng: " + position.coords.longitude);
