@@ -126,3 +126,57 @@ function answerTest() {
         "&completed=" + thCompleted, true);
     xhttp.send();
 }
+
+function scoreTest() {
+    var thCompleted = false;
+    var thFinished = false;
+    var errorParam = false;
+    if(document.getElementById("sthCompleted").checked === true)
+        thCompleted = true;
+    if(document.getElementById("thFinished").checked === true)
+        thFinished = true;
+    if(document.getElementById("errorParam").checked === true)
+        errorParam = true;
+    var scoreNumber = document.getElementById("scoreNumber").value;
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
+        if (this.readyState === 4 && this.status === 200) {
+            var object = JSON.parse(this.responseText);
+            var scoreTestingDisplay = document.getElementById("scoreTestingDisplay");
+            scoreTestingDisplay.innerHTML = "";
+            scoreTestingDisplay.innerHTML = JSON.stringify(object,null,4);
+        }
+        else {
+            //TODO If response not received (error).
+        }
+    };
+    xhttp.open("GET", "https://codecyprus.org/th/test-api/score?" +
+        "score=" + scoreNumber +
+        "&completed=" + thCompleted +
+        "&finished=" + thFinished +
+        "&error=" + errorParam, true);
+    xhttp.send();
+}
+
+function leaderboardTest() {
+    var sortedTest = false;
+    if(document.getElementById("sortedTest").checked === true)
+        sortedTest = true;
+    var sizeNumber = document.getElementById("sizeNumber").value;
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
+        if (this.readyState === 4 && this.status === 200) {
+            var object = JSON.parse(this.responseText);
+            var scoreTestingDisplay = document.getElementById("leaderboardTestingDisplay");
+            scoreTestingDisplay.innerHTML = "";
+            scoreTestingDisplay.innerHTML = JSON.stringify(object,null,4);
+        }
+        else {
+            //TODO If response not received (error).
+        }
+    };
+    xhttp.open("GET", "https://codecyprus.org/th/test-api/leaderboard?" +
+        "sorted=" + sortedTest +
+        "&size=" + sizeNumber, true);
+    xhttp.send();
+}

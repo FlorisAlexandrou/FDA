@@ -99,7 +99,40 @@
     <button onclick="answerTest()">Call Answer</button>
     <button class="clearDisplays" onclick="clearDisplays('answerTestingDisplay')">Clear Display</button>
     <div class="testingDisplay" id="answerTestingDisplay">Answer response will appear here :)</div>
+    <br>
 
+    <!--Score function call Testing -->
+    <p class="testingFunctions">Score function call testing.</p>
+    Parameters: <br>
+    Score
+    <input type="text" id="scoreNumber" >
+    <br>
+    Th completed
+    <input  type="checkbox" id="sthCompleted">
+    <br>
+    Th finished
+    <input type="checkbox" id="thFinished" >
+    <br>
+    error
+    <input  type="checkbox" id="errorParam">
+    <br>
+    <button onclick="scoreTest()">Call Score</button>
+    <button class="clearDisplays" onclick="clearDisplays('scoreTestingDisplay')">Clear Display</button>
+    <div class="testingDisplay" id="scoreTestingDisplay">Score response will appear here :)</div>
+    <br>
+
+    <!--Leaderboard function call Testing -->
+    <p class="testingFunctions">Leaderboard function call testing.</p>
+    Parameters: <br>
+    Size
+    <input type="text" id="sizeNumber">
+    <br>
+    Sorted
+    <input  type="checkbox" id="sortedTest">
+    <br>
+    <button onclick="leaderboardTest()">Call Leaderboard</button>
+    <button class="clearDisplays" onclick="clearDisplays('leaderboardTestingDisplay')">Clear Display</button>
+    <div class="testingDisplay" id="leaderboardTestingDisplay">Score response will appear here :)</div>
 </div>
 <script src="th-testing-api.js"></script>
 </body>
