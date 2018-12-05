@@ -1,6 +1,7 @@
 html {
     background: url(pictures/background.jpg) no-repeat center center fixed; /*Set the image as background*/
     background-size: cover;
+    height: 100%;
     position: relative;
     text-align: center; /*Of the whole website*/
 
@@ -70,8 +71,12 @@ h1{
 
 }
 
+#loginForm{
+    font-size: 20px;
+}
+
 #username{
-    font-size: 100%;
+
 }
 
 #sbutton {
@@ -83,9 +88,7 @@ h1{
     height: 18px;
 }
 
-#loginForm{
-    font-size: 130%;
-}
+
 
 .ansForm{
 font-size: 130%;
