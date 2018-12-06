@@ -22,3 +22,7 @@ We made another meeting to finalize our work and discuss about testing.
 We fixed our UI for usability and initialised testing page.
 ####2/12/18
 We further developed testing and added more information in landing page.
+####4/12/18
+We made a meeting to discuss about our progress.
+####6/12/18
+We finished with the testing part and added final touches.
