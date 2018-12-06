@@ -12,42 +12,61 @@
     <h2>Test plan</h2>
     <h4>Description:</h4>
     <p>
-        The product to be tested is a treasure hunt web application targeting mobile devices. It requests data from "code
-        cyprus" web server to implement the functions for the application. At a very high level, the functions consist of
+        The product to be tested is a treasure hunt web application targeting mobile devices. It requests data from
+        "code
+        cyprus" web server to implement the functions for the application. At a very high level, the functions consist
+        of
         requesting certain questions,receiving answers from the user, calculating the score and showing
         the leaderboard.
     </p>
 
     <h4>Scope<br>(what to test)</h4>
-    <h4>General:</h4><p>To see weather or not this treasure hunting app works, we must conduct a test to see if it is working properly.
-      This is called Unit Testing. It means to test a function of whatever project you are doing, to see if the function works well and
-    goes perfectly with whatever it is you are doing.</p>
+    <h4>General:</h4>
+    <p>To see weather or not this treasure hunting app works, we must conduct a test to see if it is working properly.
+        This is called Unit Testing. It means to test a function of whatever project you are doing, to see if the
+        function works well and
+        goes perfectly with whatever it is you are doing.</p>
 
-    <li>The first function test is the list function. This is to see how many treasure hunts can be in use at the same time.</li>
-<br>
-    <li>The second function test is the start function. This will help to see which part of the treasure hunt can start well. Example: Starting as a player. Or starting the hunt.</li>
-<br>
-    <li>The third function test is the question function. It tests if any of the questions work with location of if they can be skipped or be completed without problems.</li>
-<br>
-    <li>The fourth function test is the answer function. It tests if the treasure hunt can respond to the user by saying if the question is correct and complete.</li>
-<br>
-    <li>The fifth function test is the score function. It tests if the treasure hunt can respond to the user by saying if there is a error, or the question is complete, or the hunt is complete.</li>
-<br>
-    <li>The last function test is the leaderboard function. It tests if the leaderboard can open and show how much the user got compared to other users and what ranking.</li>
+    <li>The first function test is the list function. This is to see how many treasure hunts can be in use at the same
+        time.
+    </li>
+    <br>
+    <li>The second function test is the start function. This will help to see which part of the treasure hunt can start
+        well. Example: Starting as a player. Or starting the hunt.
+    </li>
+    <br>
+    <li>The third function test is the question function. It tests if any of the questions work with location of if they
+        can be skipped or be completed without problems.
+    </li>
+    <br>
+    <li>The fourth function test is the answer function. It tests if the treasure hunt can respond to the user by saying
+        if the question is correct and complete.
+    </li>
+    <br>
+    <li>The fifth function test is the score function. It tests if the treasure hunt can respond to the user by saying
+        if there is a error, or the question is complete, or the hunt is complete.
+    </li>
+    <br>
+    <li>The last function test is the leaderboard function. It tests if the leaderboard can open and show how much the
+        user got compared to other users and what ranking.
+    </li>
     </p>
 
-    <h4>Tactics:</h4>Our JavaScript developer has made some tests for each of these functions. The tester will use these functions to identify any anomalies in the server response or
+    <h4>Tactics:</h4>Our JavaScript developer has made some tests for each of these functions. The tester will use these
+    functions to identify any anomalies in the server response or
     the way the response in presented.</p>
 
     <h4>Out-Of-Scope</h4>
-    <p>The function that we are going to exclude, are the location and skip functions because they do not exist in the testing api.</p>
+    <p>The function that we are going to exclude, are the location and skip functions because they do not exist in the
+        testing api.</p>
 
     <h4>Assumptions</h4>
     <p>We assume that the testing will take place during and after the development phase.</p>
 
     <h4>Error Management</h4>
-    <p>How are the bugs going to be handled?: Well, our tester will try every function and part of the treasure hunt and if he finds a problem he will report to both the Web Designer and the
-    JavaScript Developer.</p>
+    <p>How are the bugs going to be handled?: Well, our tester will try every function and part of the treasure hunt and
+        if he finds a problem he will report to both the Web Designer and the
+        JavaScript Developer.</p>
 
     <h2>Unit Testing</h2>
 
@@ -92,13 +111,13 @@
     </select>
     <br>
     Th completed
-    <input  type="checkbox" id="qthCompleted">
+    <input type="checkbox" id="qthCompleted">
     <br>
     Can be Skipped
-    <input  type="checkbox" id="canBeSkipped">
+    <input type="checkbox" id="canBeSkipped">
     <br>
     Requires Location
-    <input  type="checkbox" id="requiresLocation">
+    <input type="checkbox" id="requiresLocation">
     <br>
     <button onclick="questionTest()">Call Question</button>
     <button class="clearDisplays" onclick="clearDisplays('questionTestingDisplay')">Clear Display</button>
@@ -109,10 +128,10 @@
     <p class="testingFunctions">Answer function call testing.</p>
     Parameters: <br>
     Correct
-    <input type="checkbox" id="correct" >
+    <input type="checkbox" id="correct">
     <br>
     Th completed
-    <input  type="checkbox" id="athCompleted">
+    <input type="checkbox" id="athCompleted">
     <br>
     <button onclick="answerTest()">Call Answer</button>
     <button class="clearDisplays" onclick="clearDisplays('answerTestingDisplay')">Clear Display</button>
@@ -123,16 +142,16 @@
     <p class="testingFunctions">Score function call testing.</p>
     Parameters: <br>
     Score
-    <input type="text" id="scoreNumber" >
+    <input type="text" id="scoreNumber">
     <br>
     Th completed
-    <input  type="checkbox" id="sthCompleted">
+    <input type="checkbox" id="sthCompleted">
     <br>
     Th finished
-    <input type="checkbox" id="thFinished" >
+    <input type="checkbox" id="thFinished">
     <br>
     error
-    <input  type="checkbox" id="errorParam">
+    <input type="checkbox" id="errorParam">
     <br>
     <button onclick="scoreTest()">Call Score</button>
     <button class="clearDisplays" onclick="clearDisplays('scoreTestingDisplay')">Clear Display</button>
@@ -146,7 +165,7 @@
     <input type="text" id="sizeNumber">
     <br>
     Sorted
-    <input  type="checkbox" id="sortedTest">
+    <input type="checkbox" id="sortedTest">
     <br>
     <button onclick="leaderboardTest()">Call Leaderboard</button>
     <button class="clearDisplays" onclick="clearDisplays('leaderboardTestingDisplay')">Clear Display</button>

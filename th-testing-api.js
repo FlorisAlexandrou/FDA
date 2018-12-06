@@ -26,7 +26,7 @@ function listTest() {
             listTestingDisplay.innerHTML = "";
             for (let i = 0; i < object.treasureHunts.length; i++) {
 
-                listTestingDisplay.innerHTML += "<p>" + (i + 1) + ". " + JSON.stringify(object.treasureHunts[i], null , 4) + "<p/>";
+                listTestingDisplay.innerHTML += "<p>" + (i + 1) + ". " + JSON.stringify(object.treasureHunts[i], null, 4) + "<p/>";
 
             }
         }
@@ -57,13 +57,13 @@ function startTest() {
             var object = JSON.parse(this.responseText);
             var startTestingDisplay = document.getElementById("startTestingDisplay");
             startTestingDisplay.innerHTML = "";
-            startTestingDisplay.innerHTML = JSON.stringify(object,null,4);
+            startTestingDisplay.innerHTML = JSON.stringify(object, null, 4);
         }
         else {
             //TODO If response not received (error).
         }
     };
-    xhttp.open("GET", "https://codecyprus.org/th/test-api/start?player=" + sTestParams , true);
+    xhttp.open("GET", "https://codecyprus.org/th/test-api/start?player=" + sTestParams, true);
     xhttp.send();
 }
 
@@ -73,11 +73,11 @@ function questionTest() {
     var requiresLocation = false;
     var qTestList = document.getElementById("questionTestParameters");
     var qType = qTestList.options[qTestList.selectedIndex].value;
-    if(document.getElementById("qthCompleted").checked === true)
+    if (document.getElementById("qthCompleted").checked === true)
         thCompleted = true;
-    if(document.getElementById("canBeSkipped").checked === true)
+    if (document.getElementById("canBeSkipped").checked === true)
         canBeSkipped = true;
-    if(document.getElementById("requiresLocation").checked === true)
+    if (document.getElementById("requiresLocation").checked === true)
         requiresLocation = true;
 
     var xhttp = new XMLHttpRequest();
@@ -87,7 +87,7 @@ function questionTest() {
             var object = JSON.parse(this.responseText);
             var questionTestingDisplay = document.getElementById("questionTestingDisplay");
             questionTestingDisplay.innerHTML = "";
-            questionTestingDisplay.innerHTML = JSON.stringify(object,null,4);
+            questionTestingDisplay.innerHTML = JSON.stringify(object, null, 4);
         }
         else {
             //TODO If response not received (error).
@@ -104,9 +104,9 @@ function questionTest() {
 function answerTest() {
     var correct = false;
     var thCompleted = false;
-    if(document.getElementById("correct").checked === true)
+    if (document.getElementById("correct").checked === true)
         correct = true;
-    if(document.getElementById("athCompleted").checked === true)
+    if (document.getElementById("athCompleted").checked === true)
         thCompleted = true;
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
@@ -115,7 +115,7 @@ function answerTest() {
             var object = JSON.parse(this.responseText);
             var questionTestingDisplay = document.getElementById("answerTestingDisplay");
             questionTestingDisplay.innerHTML = "";
-            questionTestingDisplay.innerHTML = JSON.stringify(object,null,4);
+            questionTestingDisplay.innerHTML = JSON.stringify(object, null, 4);
         }
         else {
             //TODO If response not received (error).
@@ -131,11 +131,11 @@ function scoreTest() {
     var thCompleted = false;
     var thFinished = false;
     var errorParam = false;
-    if(document.getElementById("sthCompleted").checked === true)
+    if (document.getElementById("sthCompleted").checked === true)
         thCompleted = true;
-    if(document.getElementById("thFinished").checked === true)
+    if (document.getElementById("thFinished").checked === true)
         thFinished = true;
-    if(document.getElementById("errorParam").checked === true)
+    if (document.getElementById("errorParam").checked === true)
         errorParam = true;
     var scoreNumber = document.getElementById("scoreNumber").value;
     var xhttp = new XMLHttpRequest();
@@ -144,7 +144,7 @@ function scoreTest() {
             var object = JSON.parse(this.responseText);
             var scoreTestingDisplay = document.getElementById("scoreTestingDisplay");
             scoreTestingDisplay.innerHTML = "";
-            scoreTestingDisplay.innerHTML = JSON.stringify(object,null,4);
+            scoreTestingDisplay.innerHTML = JSON.stringify(object, null, 4);
         }
         else {
             //TODO If response not received (error).
@@ -160,7 +160,7 @@ function scoreTest() {
 
 function leaderboardTest() {
     var sortedTest = false;
-    if(document.getElementById("sortedTest").checked === true)
+    if (document.getElementById("sortedTest").checked === true)
         sortedTest = true;
     var sizeNumber = document.getElementById("sizeNumber").value;
     var xhttp = new XMLHttpRequest();
@@ -169,7 +169,7 @@ function leaderboardTest() {
             var object = JSON.parse(this.responseText);
             var scoreTestingDisplay = document.getElementById("leaderboardTestingDisplay");
             scoreTestingDisplay.innerHTML = "";
-            scoreTestingDisplay.innerHTML = JSON.stringify(object,null,4);
+            scoreTestingDisplay.innerHTML = JSON.stringify(object, null, 4);
         }
         else {
             //TODO If response not received (error).

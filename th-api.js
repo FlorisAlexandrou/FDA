@@ -1,4 +1,5 @@
 const appName = "FDA";
+
 function list() {
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
@@ -38,10 +39,6 @@ function submit() {
 function start(uName) {
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
-
-       // console.log(this.status);
-        //console.log(this.readyState);
-
         if (this.readyState === 4 && this.status === 200) {
             object = JSON.parse(this.responseText);
             if (object.status === "ERROR") {
@@ -70,14 +67,14 @@ function question() {
             object = JSON.parse(this.responseText);
 
             //If the questions are over send to leaderboard page.
-            if (object.currentQuestionIndex === object.numOfQuestions){
+            if (object.currentQuestionIndex === object.numOfQuestions) {
                 document.cookie = "session=" + getCookie("session") + "; expires=Thu, 01 Jan 2000 00:00:01 GMT";
                 window.location.href = "leaderboard.html";
             }
 
             //Get location if needed
-            if (object.requiresLocation === true){
-                if(confirm("This questions requires Location, Do you wish to give your location?")){
+            if (object.requiresLocation === true) {
+                if (confirm("This questions requires Location, Do you wish to give your location?")) {
                     getLocation();
                 }
             }
@@ -86,7 +83,7 @@ function question() {
             qText.innerHTML = "<p id='qText'>" + object.questionText + "</p>";
 
             //Dynamically create elements according to data type of question.
-                //For multiple choice questions
+            //For multiple choice questions
             if (object.questionType === "MCQ") {
                 let qDiv = document.getElementById("questionType");
                 qDiv.innerHTML = "<form class='ansForm'>" +
@@ -98,7 +95,7 @@ function question() {
                     "<input class='skipButton' type='button' name='skip' value='Skip' onclick ='canSkip()'>" +
                     "</form>";
             }
-                //For text
+            //For text
             else if (object.questionType === "TEXT") {
                 let qDiv = document.getElementById("questionType");
                 qDiv.innerHTML = "<form class='ansForm'>" +
@@ -107,7 +104,7 @@ function question() {
                     "<input class='skipButton' type='button' name='skip' value='Skip' onclick ='canSkip()'>" + "</form>";
 
             }
-                //For numbers
+            //For numbers
             else if (object.questionType === "INTEGER") {
                 let qDiv = document.getElementById("questionType");
                 qDiv.innerHTML = "<form class='ansForm'>" +
@@ -115,7 +112,7 @@ function question() {
                     "<input class='ansButton' type='button' name='answer' value='Submit' onclick ='textAnswer()'>" +
                     "<input class='skipButton' type='button' name='skip' value='Skip' onclick ='canSkip()'>" + "</form>";
             }
-                //For yes/no
+            //For yes/no
             else if (object.questionType === "BOOLEAN") {
                 let qDiv = document.getElementById("questionType");
                 qDiv.innerHTML = "<form class='ansForm'>" +
@@ -124,7 +121,7 @@ function question() {
                     "<input class='ansButton' type='button' name='answer' value='Submit' onclick ='mcqAnswer()'>" +
                     "<input class='skipButton' type='button' name='skip' value='Skip' onclick ='canSkip()'>" + "</form>";
             }
-                //For float values
+            //For float values
             else if (object.questionType === "NUMERIC") {
                 let qDiv = document.getElementById("questionType");
                 qDiv.innerHTML = "<form class='ansForm'>" +
@@ -201,7 +198,7 @@ function score() {
             //TODO If response received (success).
             object = JSON.parse(this.responseText);
             var scoreDiv = document.getElementById("score");
-            scoreDiv.innerHTML ="<p>" + 'Player: ' + object.player + "<br>" + ' Score: ' + object.score + "</p>";
+            scoreDiv.innerHTML = "<p>" + 'Player: ' + object.player + "<br>" + ' Score: ' + object.score + "</p>";
         }
         else {
             let errorObject = JSON.parse(this.status);
@@ -219,7 +216,7 @@ function score() {
             object = JSON.parse(this.responseText);
             var currentQuestion = parseInt(object.currentQuestionIndex) + 1;
             var scoreDiv = document.getElementById("score");
-            scoreDiv.innerHTML+= "Questions: " + currentQuestion + "/" + object.numOfQuestions;
+            scoreDiv.innerHTML += "Questions: " + currentQuestion + "/" + object.numOfQuestions;
         }
         else {
             let errorObject = JSON.parse(this.status);
@@ -273,14 +270,15 @@ function skipq() {
 
 //Get the location from the client.
 function getLocation() {
-        navigator.geolocation.getCurrentPosition(showPosition);
+    navigator.geolocation.getCurrentPosition(showPosition);
+
     function showPosition(position) {
         sendLocation(position.coords.latitude, position.coords.longitude);
     }
 }
 
 //Send the location to the server.
-function sendLocation(latitude,longitude) {
+function sendLocation(latitude, longitude) {
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
         if (this.readyState === 4 && this.status === 200) {
@@ -308,7 +306,7 @@ function leaderboard() {
                 var leaderboardindex = document.createElement("p");
                 leaderboardindex.innerHTML = "Position: " + (i + 1) + "<br>" + " Name: " + object.leaderboard[i].player + "<br>";
                 leaderboardindex.innerHTML += " Score: " + object.leaderboard[i].score + "<br>" +
-                "- - - - - - - -";
+                    "- - - - - - - -";
                 leaderboards.appendChild(leaderboardindex);
             }
 
@@ -345,11 +343,11 @@ function getCookie(name) {
 }
 
 //Function to handle all errors received from the http request.
-function handleErrors(errorObject){
-    if(errorObject >= 300)
+function handleErrors(errorObject) {
+    if (errorObject >= 300)
         alert("Error Code: " + errorObject + "\n" + "The website might have moved, please check our social media to stay up to date!");
 
-    else if(errorObject >= 400)
+    else if (errorObject >= 400)
         alert("Error Code: " + errorObject + "\n" + "Client error, please check your browser and use chrome if possible!");
 
     else if (errorObject >= 500)
