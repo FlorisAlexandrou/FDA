@@ -14,7 +14,6 @@ function list() {
                 thLink.onclick = function setCookie() {
                     document.cookie = "uuid=" + object.treasureHunts[i].uuid
                 };
-                console.log(document.cookie);
                 treasureHunt.appendChild(thLink);
                 treasureHuntsDiv.appendChild(treasureHunt);
             }
@@ -31,7 +30,7 @@ function list() {
 function submit() {
     document.getElementById("sbutton").onclick = function saveCredentials() {
         var uName = document.getElementById("username");
-        start(uName.value, appName.value);
+        start(uName.value);
     };
 }
 
@@ -80,7 +79,8 @@ function question() {
             var qText = document.getElementById("questionText");
             qText.innerHTML = "<p id='qText'>" + object.questionText + "</p>";
 
-
+            //Dynamically create elements according to data type of question.
+                //For multiple choice questions
             if (object.questionType === "MCQ") {
                 let qDiv = document.getElementById("questionType");
                 qDiv.innerHTML = "<form class='ansForm'>" +
@@ -88,43 +88,43 @@ function question() {
                     "B<input class='radioButton' type='radio' name='ans' value='B'>" +
                     "C<input class='radioButton' type='radio' name='ans' value='C'>" +
                     "D<input class='radioButton' type='radio' name='ans' value='D'>" + "<br>" +
-                    "<input class='ansButton' type='button' name='answer' value='submit' onclick ='mcqAnswer()'>" +
-                    "<input class='skipButton' type='button' name='skip' value='skip' onclick ='canSkip()'>" +
+                    "<input class='ansButton' type='button' name='answer' value='Submit' onclick ='mcqAnswer()'>" +
+                    "<input class='skipButton' type='button' name='skip' value='Skip' onclick ='canSkip()'>" +
                     "</form>";
             }
-
+                //For text
             else if (object.questionType === "TEXT") {
                 let qDiv = document.getElementById("questionType");
                 qDiv.innerHTML = "<form class='ansForm'>" +
                     "Your Answer: <input class='ansElement' type='text' name='ans' placeholder='Answer here...'>" + "<br>" +
-                    "<input class='ansButton' type='button' name='answer' value='submit' onclick ='textAnswer()'>" +
-                    "<input class='skipButton' type='button' name='skip' value='skip' onclick ='canSkip()'>" + "</form>";
+                    "<input class='ansButton' type='button' name='answer' value='Submit' onclick ='textAnswer()'>" +
+                    "<input class='skipButton' type='button' name='skip' value='Skip' onclick ='canSkip()'>" + "</form>";
 
             }
-
+                //For numbers
             else if (object.questionType === "INTEGER") {
                 let qDiv = document.getElementById("questionType");
                 qDiv.innerHTML = "<form class='ansForm'>" +
                     "Your Answer: <input class='ansElement' type='number' step='number' name='ans' placeholder='Answer here...'>" + "<br>" +
-                    "<input class='ansButton' type='button' name='answer' value='submit' onclick ='textAnswer()'>" +
-                    "<input class='skipButton' type='button' name='skip' value='skip' onclick ='canSkip()'>" + "</form>";
+                    "<input class='ansButton' type='button' name='answer' value='Submit' onclick ='textAnswer()'>" +
+                    "<input class='skipButton' type='button' name='skip' value='Skip' onclick ='canSkip()'>" + "</form>";
             }
-
+                //For yes/no
             else if (object.questionType === "BOOLEAN") {
                 let qDiv = document.getElementById("questionType");
                 qDiv.innerHTML = "<form class='ansForm'>" +
-                    "true<input class='radioButton' type='radio' name='ans' value='true'>" +
-                    "false<input class='radioButton' type='radio' name='ans' value='false'>" + "<br>" +
-                    "<input class='ansButton' type='button' name='answer' value='submit' onclick ='mcqAnswer()'>" +
-                    "<input class='skipButton' type='button' name='skip' value='skip' onclick ='canSkip()'>" + "</form>";
+                    "True<input class='radioButton' type='radio' name='ans' value='true'>" +
+                    "False<input class='radioButton' type='radio' name='ans' value='false'>" + "<br>" +
+                    "<input class='ansButton' type='button' name='answer' value='Submit' onclick ='mcqAnswer()'>" +
+                    "<input class='skipButton' type='button' name='skip' value='Skip' onclick ='canSkip()'>" + "</form>";
             }
-
+                //For float values
             else if (object.questionType === "NUMERIC") {
                 let qDiv = document.getElementById("questionType");
                 qDiv.innerHTML = "<form class='ansForm'>" +
                     "Your Answer: <input class='ansElement' type='number' step='any' name='ans'>" + "<br>" +
-                    "<input class='ansButton' type='button' name='answer' value='submit' onclick ='textAnswer()'>" +
-                    "<input class='skipButton' type='button' name='skip' value='skip' onclick ='canSkip()'>" + "</form>";
+                    "<input class='ansButton' type='button' name='answer' value='Submit' onclick ='textAnswer()'>" +
+                    "<input class='skipButton' type='button' name='skip' value='Skip' onclick ='canSkip()'>" + "</form>";
             }
 
         }
@@ -141,7 +141,6 @@ function question() {
 function textAnswer() {
     var ansForm = document.getElementsByClassName("ansElement");
     var ans = ansForm[0].value;
-    console.log(ans);
     if (ansForm[0].value === "")
         alert("Type an answer");
     else {
@@ -158,7 +157,6 @@ function mcqAnswer() {
         if (ansForm[0].elements[i].checked)
             var ans = ansForm[0].elements[i].value;
     }
-    console.log(ans);
     if (ans === undefined)
         alert("Choose an answer.");
     else
@@ -173,7 +171,6 @@ function answer(ans) {
         if (this.readyState === 4 && this.status === 200) {
             //TODO If response received (success).
             object = JSON.parse(this.responseText);
-            console.log(object.correct);
             if (object.correct === true)
                 location.reload();
             else {
@@ -268,8 +265,6 @@ function skipq() {
 function getLocation() {
         navigator.geolocation.getCurrentPosition(showPosition);
     function showPosition(position) {
-        console.log("lat: " + position.coords.latitude);
-        console.log("lng: " + position.coords.longitude);
         sendLocation(position.coords.latitude, position.coords.longitude);
     }
 }
@@ -280,7 +275,6 @@ function sendLocation(latitude,longitude) {
     xhttp.onreadystatechange = function () {
         if (this.readyState === 4 && this.status === 200) {
             //TODO If response received (success).
-            console.log("location received!");
         }
         else {
             //TODO If response not received (error).
@@ -320,7 +314,6 @@ function leaderboard() {
 
 //If cookie exists then direct to questions.
 function checkSession() {
-    console.log(getCookie("session"));
     if (getCookie("session") !== undefined) {
         if (confirm('You left a game in progress! Do you want to resume?')) {
             window.location.href = "questions.html";
