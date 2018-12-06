@@ -12,7 +12,7 @@
 <div id="qrdiv">
 <p id="cameraDisplay">Camera Display</p>
 <video id="preview"></video>
-<div id="qrcontent">QR code response will appear here</div>
+<div id="content">QR code response will appear here</div>
 </div>
 <script>
     //Enable QR scanner, function from worksheet.
@@ -70,7 +70,7 @@
 
         scanner.addListener('scan', function (content) {
             console.log(content);
-            document.getElementById("qrcontent").innerHTML = content;
+            document.getElementById("content").innerHTML = content;
         });
 </script>
 </body>
