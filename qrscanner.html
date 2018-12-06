@@ -8,7 +8,7 @@
     <script src="instascan.min.js"></script>
 </head>
 <body>
-<button class="homeButton" onclick="location.href='index.html'">Home</button>
+<button class="backButton" onclick="location.href='questions.html'">Back</button>
 <div id="qrdiv">
 <p id="cameraDisplay">Camera Display</p>
 <video id="preview"></video>
@@ -56,10 +56,12 @@
         var scanner = new Instascan.Scanner(opts);
         Instascan.Camera.getCameras().then(function (cameras) {
             if (cameras.length > 0) {
-                scanner.start(cameras[0]);
+                scanner.start(cameras[1]);
             } else {
                 console.error('No cameras found.');
-                alert("No cameras found.");
+                alert("No cameras found. Going back to questions!");
+                window.location.href = "questions.html";
+
             }
         }).catch(function (e) {
             console.error(e);

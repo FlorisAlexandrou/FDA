@@ -4,7 +4,7 @@ function list() {
     xhttp.onreadystatechange = function () {
         if (this.readyState === 4 && this.status === 200) {
             //TODO If response received (success).
-            object = JSON.parse(this.responseText);
+            var object = JSON.parse(this.responseText);
             for (let i = 0; i < object.treasureHunts.length; i++) {
                 var treasureHuntsDiv = document.getElementById("treasureHunt");
                 var treasureHunt = document.createElement("p");
@@ -19,7 +19,8 @@ function list() {
             }
         }
         else {
-            //TODO If response not received (error).
+            let errorObject = JSON.parse(this.status);
+            handleErrors(errorObject);
         }
     };
 
@@ -37,6 +38,10 @@ function submit() {
 function start(uName) {
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
+
+       // console.log(this.status);
+        //console.log(this.readyState);
+
         if (this.readyState === 4 && this.status === 200) {
             object = JSON.parse(this.responseText);
             if (object.status === "ERROR") {
@@ -48,7 +53,8 @@ function start(uName) {
             }
         }
         else {
-            //TODO If response not received (error).
+            let errorObject = JSON.parse(this.status);
+            handleErrors(errorObject);
         }
     };
 
@@ -179,7 +185,8 @@ function answer(ans) {
             }
         }
         else {
-            //TODO If response not received (error).
+            let errorObject = JSON.parse(this.status);
+            handleErrors(errorObject);
         }
     };
     xhttp.open("GET", "https://codecyprus.org/th/api/answer?session=" + getCookie("session") + "&answer=" + ans, true);
@@ -197,7 +204,8 @@ function score() {
             scoreDiv.innerHTML ="<p>" + 'Player: ' + object.player + "<br>" + ' Score: ' + object.score + "</p>";
         }
         else {
-            //TODO If response not received (error).
+            let errorObject = JSON.parse(this.status);
+            handleErrors(errorObject);
         }
     };
     xhttp.open("GET", "https://codecyprus.org/th/api/score?session=" + getCookie("session"), true);
@@ -214,7 +222,8 @@ function score() {
             scoreDiv.innerHTML+= "Questions: " + currentQuestion + "/" + object.numOfQuestions;
         }
         else {
-            //TODO If response not received (error).
+            let errorObject = JSON.parse(this.status);
+            handleErrors(errorObject);
         }
     };
     xhttp.open("GET", "https://codecyprus.org/th/api/question?session=" + getCookie("session"), true);
@@ -236,7 +245,8 @@ function canSkip() {
             }
         }
         else {
-            //TODO If response not received (error).
+            let errorObject = JSON.parse(this.status);
+            handleErrors(errorObject);
         }
     };
     xhttp.open("GET", "https://codecyprus.org/th/api/question?session=" + getCookie("session"), true);
@@ -249,11 +259,11 @@ function skipq() {
         var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function () {
             if (this.readyState === 4 && this.status === 200) {
-                //TODO If response received (success).
                 location.reload();
             }
             else {
-                //TODO If response not received (error).
+                let errorObject = JSON.parse(this.status);
+                handleErrors(errorObject);
             }
         };
         xhttp.open("GET", "https://codecyprus.org/th/api/skip?session=" + getCookie("session"), true);
@@ -274,10 +284,11 @@ function sendLocation(latitude,longitude) {
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
         if (this.readyState === 4 && this.status === 200) {
-            //TODO If response received (success).
+
         }
         else {
-            //TODO If response not received (error).
+            let errorObject = JSON.parse(this.status);
+            handleErrors(errorObject);
         }
     };
     xhttp.open("GET", "https://codecyprus.org/th/api/location?" +
@@ -291,7 +302,6 @@ function leaderboard() {
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
         if (this.readyState === 4 && this.status === 200) {
-            //TODO If response received (success).
             object = JSON.parse(this.responseText);
             for (let i = 0; i < numOfPlayersLimit; i++) {
                 var leaderboards = document.getElementById("lead");
@@ -304,7 +314,8 @@ function leaderboard() {
 
         }
         else {
-            //TODO If response not received (error).
+            let errorObject = JSON.parse(this.status);
+            handleErrors(errorObject);
         }
     };
 
@@ -325,9 +336,24 @@ function checkSession() {
     }
 }
 
-//function to access the value of a specific cookie by name from stack overflow (URL: https://stackoverflow.com/questions/10730362/get-cookie-by-name).
+//function to access the value of a specific cookie by name from stack overflow.
+//URL: https://stackoverflow.com/questions/10730362/get-cookie-by-name
 function getCookie(name) {
     var value = "; " + document.cookie;
     var parts = value.split("; " + name + "=");
     if (parts.length === 2) return parts.pop().split(";").shift();
+}
+
+//Function to handle all errors received from the http request.
+function handleErrors(errorObject){
+    if(errorObject >= 300)
+        alert("Error Code: " + errorObject + "\n" + "The website might have moved, please check our social media to stay up to date!");
+
+    else if(errorObject >= 400)
+        alert("Error Code: " + errorObject + "\n" + "Client error, please check your browser and use chrome if possible!");
+
+    else if (errorObject >= 500)
+        alert("Error Code: " + errorObject + "\n" + "Internal server error, Something's wrong withing the server!" + "\n" +
+            "Please contact with the server administrator" +
+            "\n" + "We do apologise for the inconvenience!");
 }
